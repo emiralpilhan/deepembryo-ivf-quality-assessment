@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block page_title %}Tahmin Geçmişi{% endblock %}
+{% block page_subtitle %}Veritabanına kaydedilen tahminler, gerçek sınıflar ve düşük güven durumları.{% endblock %}
+
+{% block content %}
+<section class="panel">
+    <div class="panel-heading panel-heading--split">
+        <div>
+            <p class="kicker">Kayıtlar</p>
+            <h2>Geçmiş tahminler</h2>
+        </div>
+        <a href="{{ url_for('export_csv') }}" class="button button--secondary">CSV indir</a>
+    </div>
+
+    {% if predictions %}
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tarih</th>
+                    <th>Dosya</th>
+                    <th>Tahmin</th>
+                    <th>Gerçek sınıf</th>
+                    <th>Güvenilirlik</th>
+                    <th>Durum</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in predictions %}
+                <tr>
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.timestamp[:19] }}</td>
+                    <td>{{ p.filename }}</td>
+                    <td>{{ p.predicted_class }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('update_history_actual_class', prediction_id=p.id) }}" class="inline-form">
+                            <select name="actual_class" class="table-select" aria-label="Gerçek sınıf">
+                                <option value="">Bilinmiyor</option>
+                                {% for class_name in class_names %}
+                                <option value="{{ class_name }}" {% if p.actual_class == class_name %}selected{% endif %}>{{ class_name }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="mini-button">Kaydet</button>
+                        </form>
+                    </td>
+                    <td class="{% if p.is_low_confidence %}text-warning{% endif %}">
+                        {{ "%.2f"|format(p.confidence * 100) }}%
+                    </td>
+                    <td>
+                        {% if p.is_low_confidence %}
+                        <span class="status status--warning">Düşük güven</span>
+                        {% else %}
+                        <span class="status">Normal</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="empty-state">Henüz tahmin yapılmamış.</p>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block page_title %}Embriyo Kalite Değerlendirme Paneli{% endblock %}
+{% block page_subtitle %}
+Tekli ve toplu görüntü analizi, Grad-CAM görsel kanıtı, düşük güven uyarısı ve CSV geçmiş çıktısı aynı arayüzde.
+{% endblock %}
+
+{% block content %}
+<section class="metric-strip" aria-label="Uygulama özeti">
+    <article class="metric">
+        <span>Model</span>
+        <strong>InceptionV3</strong>
+    </article>
+    <article class="metric">
+        <span>Sınıf sayısı</span>
+        <strong>{{ class_names|length }}</strong>
+    </article>
+    <article class="metric">
+        <span>Düşük güven eşiği</span>
+        <strong>{{ "%.0f"|format(low_confidence_threshold * 100) }}%</strong>
+    </article>
+    <article class="metric">
+        <span>Çıktı</span>
+        <strong>Grad-CAM + CSV</strong>
+    </article>
+</section>
+
+<section class="dashboard-grid">
+    <article class="panel upload-panel">
+        <div class="panel-heading">
+            <p class="kicker">Tekli analiz</p>
+            <h2>Görüntü tahmini</h2>
+        </div>
+        <form method="POST" action="{{ url_for('predict') }}" enctype="multipart/form-data" class="stacked-form">
+            <label class="upload-zone" for="singleFile">
+                <span class="upload-zone__title">Embriyo görüntüsü seç</span>
+                <span class="upload-zone__meta" data-file-name="singleFile">BMP, JPG, PNG ve TIFF</span>
+            </label>
+            <input class="visually-hidden" type="file" id="singleFile" name="file" accept="image/*" onchange="this.form.submit()" required>
+            <noscript><button type="submit">Tahmini başlat</button></noscript>
+        </form>
+    </article>
+
+    <article class="panel upload-panel">
+        <div class="panel-heading">
+            <p class="kicker">Toplu analiz</p>
+            <h2>Dosya veya klasör tahmini</h2>
+        </div>
+        <form method="POST" action="{{ url_for('batch_predict') }}" enctype="multipart/form-data" class="stacked-form">
+            <label class="upload-zone upload-zone--secondary" for="batchFiles">
+                <span class="upload-zone__title">Birden fazla görüntü veya klasör seç</span>
+                <span class="upload-zone__meta" data-file-name="batchFiles">Her görüntü için tahmin ve Grad-CAM üretilir</span>
+            </label>
+            <input class="visually-hidden" type="file" id="batchFiles" name="files" accept="image/*" multiple webkitdirectory directory onchange="this.form.submit()">
+            <noscript><button type="submit">Toplu tahmini başlat</button></noscript>
+        </form>
+    </article>
+</section>
+
+<section class="panel">
+    <div class="panel-heading">
+        <p class="kicker">Gardner sınıfları</p>
+        <h2>Aktif etiket düzeni</h2>
+    </div>
+    <div class="class-grid">
+        {% for class_name in class_names %}
+        <span class="class-pill">{{ class_name }}</span>
+        {% endfor %}
+    </div>
+    <p class="muted">
+        Bu arayüz mevcut eğitilmiş modelin dört sınıflı Gardner gruplamasını kullanır; tahmin sonrası düşük güven durumları ayrıca işaretlenir.
+    </p>
+</section>
+{% endblock %}

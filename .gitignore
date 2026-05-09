@@ -1,0 +1,62 @@
+# Python cache / build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments and local environment files
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.*
+
+# Editor / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and temporary runtime files
+*.log
+outputs/training.log
+
+# Large trained model/checkpoint files
+# Keep these outside normal Git history. Use GitHub Releases, Drive, or Git LFS if required.
+*.h5
+*.hdf5
+*.keras
+*.ckpt
+*.pkl
+*.joblib
+outputs/models/
+
+# Non-final experiment outputs
+outputs/experiments/
+
+# Heavy generated Grad-CAM image outputs
+outputs/gradcam/
+
+# Web runtime artifacts
+webapp/deepembryo.db
+webapp/uploads/
+*.db
+*.sqlite
+*.sqlite3
+
+# Generated PDF extraction helper files
+outputs/reports/pdf_requirements_extracted*.txt
+
+# Raw datasets and local course archives should not be committed
+EMBRIO GRADE DATASET/
+datasets/
+data/raw/
+*.bmp
+*.zip
+*.rar
+*.7z
+

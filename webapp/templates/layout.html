@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepEmbryo - {% block page_title %}Embriyo Analizi{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="app-header">
+        <div class="shell header-grid">
+            <div>
+                <p class="eyebrow">DeepEmbryo</p>
+                <h1>{% block header_title %}{{ self.page_title() }}{% endblock %}</h1>
+                <p class="lead">{% block page_subtitle %}Embriyo kalite değerlendirme arayüzü.{% endblock %}</p>
+            </div>
+            <nav class="nav" aria-label="Ana gezinme">
+                <a href="{{ url_for('index') }}">Analiz</a>
+                <a href="{{ url_for('history') }}">Geçmiş</a>
+                <a href="{{ url_for('export_csv') }}">CSV</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="shell page-main">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <section class="flash-stack" aria-label="Bildirimler">
+            {% for category, message in messages %}
+            <article class="flash {{ category }}">{{ message }}</article>
+            {% endfor %}
+        </section>
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="shell app-footer">
+        <span>InceptionV3</span>
+        <span>Gardner sınıflandırma</span>
+        <span>Grad-CAM</span>
+    </footer>
+
+    <script>
+        document.querySelectorAll("[data-file-name]").forEach((label) => {
+            const input = document.getElementById(label.dataset.fileName);
+            if (!input) return;
+            input.addEventListener("change", () => {
+                if (!input.files || input.files.length === 0) return;
+                label.textContent = input.files.length === 1
+                    ? input.files[0].name
+                    : `${input.files.length} dosya seçildi`;
+            });
+        });
+    </script>
+</body>
+</html>

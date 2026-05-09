@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block page_title %}Tahmin Sonucu{% endblock %}
+{% block page_subtitle %}Model çıktısı, sınıf olasılıkları ve Grad-CAM görsel kanıtı.{% endblock %}
+
+{% block content %}
+<section class="result-grid">
+    <article class="panel result-summary">
+        <p class="kicker">Dosya</p>
+        <h2>{{ filename }}</h2>
+
+        <div class="prediction-badge {% if is_low_confidence %}prediction-badge--warning{% endif %}">
+            <span>Tahmin</span>
+            <strong>{{ predicted_class }}</strong>
+        </div>
+
+        <dl class="detail-list">
+            <div>
+                <dt>Güvenilirlik</dt>
+                <dd class="{% if is_low_confidence %}text-warning{% endif %}">{{ confidence }}</dd>
+            </div>
+            {% if actual_class %}
+            <div>
+                <dt>Gerçek sınıf</dt>
+                <dd>{{ actual_class }}</dd>
+            </div>
+            {% endif %}
+        </dl>
+
+        {% if warning %}
+        <div class="warning-box">{{ warning }}</div>
+        {% endif %}
+
+        <a href="{{ url_for('index') }}" class="button">Yeni tahmin</a>
+    </article>
+
+    {% if gradcam_url %}
+    <article class="panel">
+        <div class="panel-heading">
+            <p class="kicker">Görsel kanıt</p>
+            <h2>Grad-CAM</h2>
+        </div>
+        <img class="gradcam-image" src="{{ gradcam_url }}" alt="Grad-CAM overlay">
+    </article>
+    {% endif %}
+</section>
+
+<section class="panel">
+    <div class="panel-heading">
+        <p class="kicker">Softmax çıktısı</p>
+        <h2>Sınıf olasılıkları</h2>
+    </div>
+    <div class="probability-list">
+        {% for item in top5 %}
+        <div class="probability-row">
+            <div class="probability-row__top">
+                <span>{{ item.class }}</span>
+                <strong>{{ item.probability }}</strong>
+            </div>
+            <div class="probability-bar" aria-hidden="true">
+                <span style="width: {{ item.probability }};"></span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

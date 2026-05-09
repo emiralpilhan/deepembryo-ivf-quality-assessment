@@ -1,0 +1,39 @@
+{
+  "genel_ozet": {
+    "toplam_tahmin": 25,
+    "ortalama_guvenilirlik": 0.7455645203590393,
+    "medyan_guvenilirlik": 0.7923722267150879,
+    "min_guvenilirlik": 0.40913867950439453,
+    "max_guvenilirlik": 0.9934451580047607,
+    "dusuk_guvenilirlik_sayisi": 12
+  },
+  "sinif_bazli_analiz": {
+    "3AA": {
+      "dogruluk": 0.8333333333333334,
+      "ortalama_guvenilirlik": 0.6620197892189026,
+      "ornek_sayisi": 6
+    },
+    "3CC": {
+      "dogruluk": 0.5,
+      "ortalama_guvenilirlik": 0.6190990805625916,
+      "ornek_sayisi": 6
+    },
+    "4AA": {
+      "dogruluk": 0.7777777777777778,
+      "ortalama_guvenilirlik": 0.7917020320892334,
+      "ornek_sayisi": 9
+    },
+    "Cleavage": {
+      "dogruluk": 1.0,
+      "ortalama_guvenilirlik": 0.9567705988883972,
+      "ornek_sayisi": 4
+    }
+  },
+  "guvenilirlik_analizi": {},
+  "morfolojik_kriterler": {
+    "icm_odaklanma_ortalama": 0.36238450050354004,
+    "te_odaklanma_ortalama": 0.6376154899597168,
+    "simetri_skoru_ortalama": 0.8048715376853943,
+    "yorum": "Model ağırlıklı olarak TE (Trofektoderm) bölgesine odaklanmaktadır. Bu, trofektoderm hücre düzenliliğini esas aldığını göstermektedir. Simetri analizi: Model simetrik yapıları dikkate almaktadır."
+  }
+}
