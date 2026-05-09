@@ -104,6 +104,59 @@ GitHub reposunda kod, rapor ve grafikler bulunur; büyük model ağırlığı ay
 
 ---
 
+## Repo İndirildikten Sonra Dataset Nereye Konmalı?
+
+Kod dataset'i iki konumda otomatik arar.
+
+Birinci seçenek, dataset'i repo klasörünün içine koymak:
+
+```text
+DeepEmbryo/
+  EMBRIO GRADE DATASET/
+  main.py
+  README.md
+```
+
+İkinci seçenek, dataset'i repo klasörüyle aynı seviyeye koymak:
+
+```text
+EMBRIO GRADE DATASET/
+DeepEmbryo/
+```
+
+İkisi de çalışır. Dataset klasör adı tam olarak şu olmalıdır:
+
+```text
+EMBRIO GRADE DATASET
+```
+
+Dataset'i GitHub'a yüklememek için `.gitignore` içinde bu klasör zaten ignore edilmiştir.
+
+---
+
+## İndirince Direkt Çalışır mı?
+
+Eğitim için evet:
+
+1. Repo indirilir.
+2. `EMBRIO GRADE DATASET` klasörü repo içine veya repo yanına koyulur.
+3. Gereksinimler kurulur.
+4. Aşağıdaki komut çalıştırılır:
+
+```bash
+python main.py --mode train
+```
+
+Web'den direkt tahmin almak için ayrıca model dosyası gerekir:
+
+```text
+outputs/models/deepembryo_final.h5
+```
+
+Bu `.h5` dosyası GitHub'a yüklenmediği için repo'yu indiren kişi ya önce eğitim yapmalı ya da final model dosyasını ayrıca bu konuma koymalıdır.
+
+---
+
 ## Git Komutları
 
 GitHub'da boş bir repository oluşturduktan sonra proje klasöründe şu komutları çalıştırabilirsin:
@@ -146,4 +199,3 @@ __pycache__/
 ```
 
 Eğer bunlardan biri görünürse `.gitignore` tekrar kontrol edilmelidir.
-

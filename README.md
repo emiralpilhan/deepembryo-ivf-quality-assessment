@@ -213,6 +213,41 @@ DeepEmbryo/
 
 ## 8. Calistirma Talimatlari
 
+### Dataset Konumu
+
+GitHub'dan projeyi indirdikten sonra dataset klasorunu asagidaki iki konumdan birine koyabilirsiniz:
+
+```text
+DeepEmbryo/EMBRIO GRADE DATASET
+```
+
+veya:
+
+```text
+EMBRIO GRADE DATASET
+DeepEmbryo/
+```
+
+Kod iki konumu da otomatik arar. Ozel bir dataset yolu kullanmak isterseniz `DEEP_EMBRYO_DATASET_PATH` ortam degiskeni ile belirtebilirsiniz.
+
+### Model Dosyasi Notu
+
+GitHub reposunda buyuk `.h5` model dosyalari tutulmaz. Bu nedenle repo'yu yeni indiren biri icin iki yol vardir:
+
+1. Egitimi bastan calistirip modeli uretmek:
+
+```bash
+python main.py --mode train
+```
+
+2. Hazir final modeli kullanmak icin modeli su konuma koymak:
+
+```text
+outputs/models/deepembryo_final.h5
+```
+
+Hazir model bu konuma konmadan sadece `python main.py --mode webapp` calistirilirsa web arayuzu acilir, ancak tahmin icin model yuklenemez.
+
 ### Gereksinimler
 ```
 tensorflow>=2.10.0

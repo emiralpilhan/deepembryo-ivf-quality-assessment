@@ -148,6 +148,15 @@ def load_dataset():
     EMBRIO GRADE DATASET klasorunden tum goruntuleri ve etiketleri yukler.
     Sinif etiketi = dosya adindan okunan Gardner kodunun kalite grubu veya Cleavage.
     """
+    if not os.path.isdir(DATASET_PATH):
+        raise FileNotFoundError(
+            "Dataset klasoru bulunamadi. Lutfen 'EMBRIO GRADE DATASET' klasorunu "
+            "proje klasorunun icine veya proje klasorunun yanina koyun. "
+            "Alternatif olarak DEEP_EMBRYO_DATASET_PATH ortam degiskeni ile "
+            "dataset yolunu belirtin. Aranan yol: "
+            f"{DATASET_PATH}"
+        )
+
     print("=" * 60)
     print("  VERI SETI YUKLEME BASLIYOR")
     print("=" * 60)

@@ -14,7 +14,28 @@ import os
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Dataset yolu
-DATASET_PATH = os.path.join(os.path.dirname(PROJECT_ROOT), "EMBRIO GRADE DATASET")
+#
+# GitHub'dan indirenler icin iki kullanim desteklenir:
+# 1) Repo icinde:  DeepEmbryo/EMBRIO GRADE DATASET
+# 2) Repo yaninda: parent/EMBRIO GRADE DATASET
+#
+# Istenirse DEEP_EMBRYO_DATASET_PATH ortam degiskeni ile ozel bir yol da
+# verilebilir.
+DATASET_CANDIDATE_PATHS = [
+    os.environ.get("DEEP_EMBRYO_DATASET_PATH"),
+    os.path.join(PROJECT_ROOT, "EMBRIO GRADE DATASET"),
+    os.path.join(os.path.dirname(PROJECT_ROOT), "EMBRIO GRADE DATASET"),
+]
+
+
+def _resolve_dataset_path():
+    for candidate in DATASET_CANDIDATE_PATHS:
+        if candidate and os.path.isdir(candidate):
+            return candidate
+    return os.path.join(PROJECT_ROOT, "EMBRIO GRADE DATASET")
+
+
+DATASET_PATH = _resolve_dataset_path()
 
 # Çıktı dizinleri
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, "outputs")
