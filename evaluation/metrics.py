@@ -109,7 +109,7 @@ def evaluate_model(model, X_test, y_test):
     # Raporu CSV olarak kaydet
     report_df = pd.DataFrame(report_dict).transpose()
     csv_path = os.path.join(REPORT_DIR, "classification_report.csv")
-    report_df.to_csv(csv_path, encoding="utf-8-sig")
+    report_df.to_csv(csv_path, encoding="utf-8-sig", index_label="class")
     print(f"  💾 Rapor kaydedildi: {csv_path}")
 
     summary = {
