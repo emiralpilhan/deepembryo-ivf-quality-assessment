@@ -991,6 +991,8 @@ Projede learning curve epoch bazlıdır. Overfitting kontrolünü gösterir, fak
 
 Test seti 25 görüntüdür. Bu yüzden tek bir görüntünün doğru/yanlış olması accuracy'yi 4 puan değiştirir. Sonuçları yorumlarken bu unutulmamalıdır.
 
+Bu sınırlamayı daha dürüst göstermek için ayrıca 5-Fold Stratified Cross Validation ek analizi yapılmıştır. Bu analiz final modelin yerine geçmez; yalnızca veri bölünmesine duyarlılığı gösterir. Ana teslim değerlendirmesi PDF'in istediği 70/15/15 split üzerinden korunmuştur.
+
 ---
 
 ## 30. Hangi Çıktı Ne İşe Yarar?
@@ -1002,6 +1004,7 @@ Test seti 25 görüntüdür. Bu yüzden tek bir görüntünün doğru/yanlış o
 | `outputs/reports/evaluation_summary.json` | Accuracy, weighted P/R/F1, MCC, AUC-ROC ve düşük güven özeti |
 | `outputs/reports/classification_report_tta.csv` | TTA denemesinin raporu |
 | `outputs/reports/morphological_report.json` | Grad-CAM tabanlı morfolojik yorum |
+| `K_FOLD_VE_FINAL_MODEL_KARSILASTIRMA_RAPORU.md` | Final model ile K-Fold ek analizinin karşılaştırması |
 | `outputs/plots/accuracy_loss.png` | Eğitim/validasyon accuracy-loss analizi |
 | `outputs/plots/confusion_matrix.png` | Sınıf karışıklıkları |
 | `outputs/plots/learning_curve.png` | Epoch bazlı öğrenme/overfitting analizi |
@@ -1080,14 +1083,16 @@ Tam karşılananlar:
 - SQLite veritabanı
 - Gerçek sınıfı sonradan saklama
 - `.h5` model teslimi
+- K-Fold CV ek stabilite analizi
 
 Açıklama gerektirenler:
 
 - 13 alt Gardner sınıfı yerine 4 kalite grubu kullanılması
 - Learning curve grafiğinin epoch bazlı olması
 - Morfolojik raporun doğrudan klinik ölçüm değil Grad-CAM tabanlı sezgisel analiz olması
+- K-Fold CV'nin ana final model yerine değil, ek güvenilirlik analizi olarak sunulması
 
-Bu üç nokta doğru anlatılırsa proje savunulabilir ve PDF isterlerinden kopmaz.
+Bu noktalar doğru anlatılırsa proje savunulabilir ve PDF isterlerinden kopmaz.
 
 ---
 

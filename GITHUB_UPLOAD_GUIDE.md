@@ -34,6 +34,7 @@ Bu dosyalar ve klasörler repo'ya girmeli:
 ```text
 README.md
 DETAYLI_PROJE_ACIKLAMASI_VE_PDF_UYUM_RAPORU.md
+K_FOLD_VE_FINAL_MODEL_KARSILASTIRMA_RAPORU.md
 GITHUB_UPLOAD_GUIDE.md
 requirements.txt
 main.py
@@ -53,6 +54,8 @@ outputs/reports/
 ```
 
 `outputs/plots/` ve `outputs/reports/` klasörlerini tutmak iyi olur, çünkü PDF isterlerindeki grafik ve metrik çıktıları burada duruyor. Bunlar hafif dosyalar ve projeyi inceleyen kişi için faydalı.
+
+K-Fold CV deneyinin ayrıntılı yorumu `K_FOLD_VE_FINAL_MODEL_KARSILASTIRMA_RAPORU.md` içinde tutulur. Ham K-Fold deney çıktıları `outputs/experiments/` altında kaldığı için normal GitHub geçmişine yüklenmez; bu klasör `.gitignore` ile özellikle dışarıda bırakılmıştır.
 
 ---
 

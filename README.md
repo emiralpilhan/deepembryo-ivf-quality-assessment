@@ -122,12 +122,14 @@ Dense(4, Softmax) -- Cikis
 5. **Sinif Dagilimi**: Dataset dagilim grafigi
 6. **Classification Report**: CSV formatinda detayli rapor
 7. **Evaluation Summary**: Accuracy, weighted P/R/F1, MCC ve weighted OvR AUC-ROC ozeti
+8. **K-Fold CV Ek Analizi**: Final modeli degistirmeden veri bolunmesine duyarlilik kontrolu
 
 ### Performans Sonuclari
 - **Resmi Test Accuracy (Raw)**: 76.00%
 - **Weighted F1**: 0.7690
 - **Weighted Precision**: 0.8200
 - **Weighted Recall**: 0.7600
+- **Ek 5-Fold CV Out-of-Fold Accuracy**: 72.12% (ana final modelin yerine gecmez; ek stabilite analizidir)
 - **Ek TTA Test Accuracy**: 68.00% (bu veri setinde raw tahmin daha iyi oldugu icin resmi rapor raw sonucudur)
 - Cleavage sinifi en guvenilir sinif olarak ayrilmaktadir; 3AA ve 3CC birbirine en cok karisan gruplardir.
 
@@ -297,6 +299,7 @@ Egitim sirasinda her epoch icin tablo formatinda:
 | Evaluation Summary | Tamamlandi | outputs/reports/evaluation_summary.json |
 | Raw Classification Report | Tamamlandi | outputs/reports/classification_report_raw.csv |
 | TTA Classification Report | Tamamlandi | outputs/reports/classification_report_tta.csv |
+| K-Fold CV Karsilastirma Raporu | Ek analiz tamamlandi | K_FOLD_VE_FINAL_MODEL_KARSILASTIRMA_RAPORU.md |
 | Grad-CAM Goruntuler | Tamamlandi | outputs/gradcam/ |
 | Morfolojik Rapor | Tamamlandi | outputs/reports/morphological_report.json |
 | Kaynak Kodu (yorumlu) | Tamamlandi | Tum .py dosyalari |
@@ -330,6 +333,7 @@ Egitim sirasinda her epoch icin tablo formatinda:
 | Tekli ve toplu/klasor yukleme | Tamam | Web ana sayfasi |
 | CSV disari aktarma | Tamam | `/export/csv` |
 | Veritabani | Tamam | SQLite tahmin gecmisi ve opsiyonel gercek sinif |
+| K-Fold CV | Ek analiz | PDF'deki 70/15/15 ana split korunur; K-Fold sadece stabilite analizi olarak raporlanir |
 
 ---
 
@@ -343,6 +347,6 @@ Egitim sirasinda her epoch icin tablo formatinda:
 ### Iyilestirme Onerileri
 1. **Veri artirma**: Daha fazla embriyo goruntusu toplanmasi
 2. **Dengeli augmentation**: Her sinif icin kontrollu offline + online augmentation
-3. **K-Fold Cross-Validation**: Daha guvenilir performans tahmini
+3. **Tam derin ogrenme K-Fold**: Istenirse InceptionV3 modeli her fold icin yeniden egitilerek daha pahali bir akademik saglamlik analizi yapilabilir
 4. **Ensemble learning**: Birden fazla modelin birlestirilmesi
 5. **Farkli mimariler**: EfficientNet, ResNet50 ile karsilastirma
