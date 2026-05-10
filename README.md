@@ -121,6 +121,7 @@ Dense(4, Softmax) -- Cikis
 4. **Per-Class Metrics**: Her sinif icin P/R/F1 bar chart
 5. **Sinif Dagilimi**: Dataset dagilim grafigi
 6. **Classification Report**: CSV formatinda detayli rapor
+7. **Evaluation Summary**: Accuracy, weighted P/R/F1, MCC ve weighted OvR AUC-ROC ozeti
 
 ### Performans Sonuclari
 - **Resmi Test Accuracy (Raw)**: 76.00%
@@ -293,6 +294,7 @@ Egitim sirasinda her epoch icin tablo formatinda:
 | Learning Curve | Tamamlandi | outputs/plots/learning_curve.png |
 | Per-Class Metrics | Tamamlandi | outputs/plots/per_class_metrics.png |
 | Classification Report | Tamamlandi | outputs/reports/classification_report.csv |
+| Evaluation Summary | Tamamlandi | outputs/reports/evaluation_summary.json |
 | Raw Classification Report | Tamamlandi | outputs/reports/classification_report_raw.csv |
 | TTA Classification Report | Tamamlandi | outputs/reports/classification_report_tta.csv |
 | Grad-CAM Goruntuler | Tamamlandi | outputs/gradcam/ |

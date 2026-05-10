@@ -20,7 +20,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config.config import (
     INPUT_SHAPE, NUM_CLASSES,
     STAGE1_LEARNING_RATE, STAGE2_LEARNING_RATE,
-    DROPOUT_RATE_1, DROPOUT_RATE_2, L2_WEIGHT_DECAY,
+    DROPOUT_RATE_1, L2_WEIGHT_DECAY,
     FINE_TUNE_FROM_LAYER, LABEL_SMOOTHING
 )
 

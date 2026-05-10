@@ -1,0 +1,2 @@
+﻿accuracy,weighted_precision,weighted_recall,weighted_f1,macro_f1,mcc,weighted_auc_ovr,low_confidence_threshold,low_confidence_count,test_sample_count
+0.76,0.82,0.76,0.769,0.775,0.6933949711814644,0.9222368421052631,0.7,12,25

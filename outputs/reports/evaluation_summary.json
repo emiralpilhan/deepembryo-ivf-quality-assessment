@@ -1,0 +1,12 @@
+{
+  "accuracy": 0.76,
+  "weighted_precision": 0.82,
+  "weighted_recall": 0.76,
+  "weighted_f1": 0.769,
+  "macro_f1": 0.775,
+  "mcc": 0.6933949711814644,
+  "weighted_auc_ovr": 0.9222368421052631,
+  "low_confidence_threshold": 0.7,
+  "low_confidence_count": 12,
+  "test_sample_count": 25
+}

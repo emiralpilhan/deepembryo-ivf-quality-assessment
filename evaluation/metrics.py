@@ -8,13 +8,15 @@ PDF İsterleri: Her sınıf için ayrı ayrı + weighted ortalama.
 
 import os
 import sys
+import json
 import numpy as np
 import pandas as pd
 from sklearn.metrics import (
     classification_report,
     confusion_matrix,
     accuracy_score,
-    precision_recall_fscore_support
+    roc_auc_score,
+    matthews_corrcoef
 )
 from tensorflow.keras.applications.inception_v3 import preprocess_input
 
@@ -47,6 +49,26 @@ def evaluate_model(model, X_test, y_test):
     # Genel doğruluk
     accuracy = accuracy_score(y_true, y_pred)
     print(f"\n  📊 Test Doğruluğu (Accuracy): {accuracy:.4f} ({accuracy:.2%})")
+
+    # Ek akademik metrikler: PDF zorunlu istemez, ancak küçük ve dengesiz
+    # veri setlerinde accuracy'yi tamamlayan güvenilir özetlerdir.
+    try:
+        weighted_auc_ovr = roc_auc_score(
+            y_true,
+            predictions,
+            labels=list(range(len(CLASS_NAMES))),
+            multi_class="ovr",
+            average="weighted"
+        )
+    except ValueError:
+        weighted_auc_ovr = None
+
+    mcc = matthews_corrcoef(y_true, y_pred)
+    print(f"  📊 Matthews Correlation Coefficient (MCC): {mcc:.4f}")
+    if weighted_auc_ovr is not None:
+        print(f"  📊 Weighted OvR AUC-ROC: {weighted_auc_ovr:.4f}")
+    else:
+        print("  📊 Weighted OvR AUC-ROC: hesaplanamadı (sınıf temsili yetersiz)")
     
     # Test setindeki mevcut sınıfları belirle
     present_classes = sorted(set(y_true) | set(y_pred))
@@ -89,6 +111,26 @@ def evaluate_model(model, X_test, y_test):
     csv_path = os.path.join(REPORT_DIR, "classification_report.csv")
     report_df.to_csv(csv_path, encoding="utf-8-sig")
     print(f"  💾 Rapor kaydedildi: {csv_path}")
+
+    summary = {
+        "accuracy": float(accuracy),
+        "weighted_precision": float(report_dict.get("weighted avg", {}).get("precision", 0.0)),
+        "weighted_recall": float(report_dict.get("weighted avg", {}).get("recall", 0.0)),
+        "weighted_f1": float(report_dict.get("weighted avg", {}).get("f1-score", 0.0)),
+        "macro_f1": float(report_dict.get("macro avg", {}).get("f1-score", 0.0)),
+        "mcc": float(mcc),
+        "weighted_auc_ovr": None if weighted_auc_ovr is None else float(weighted_auc_ovr),
+        "low_confidence_threshold": float(LOW_CONFIDENCE_THRESHOLD),
+        "low_confidence_count": int(low_conf_count),
+        "test_sample_count": int(len(predictions)),
+    }
+
+    summary_json_path = os.path.join(REPORT_DIR, "evaluation_summary.json")
+    with open(summary_json_path, "w", encoding="utf-8") as f:
+        json.dump(summary, f, ensure_ascii=False, indent=2)
+    summary_csv_path = os.path.join(REPORT_DIR, "evaluation_summary.csv")
+    pd.DataFrame([summary]).to_csv(summary_csv_path, encoding="utf-8-sig", index=False)
+    print(f"  💾 Özet metrikler kaydedildi: {summary_json_path}")
     
     return predictions, y_pred, y_true, report_dict, cm, present_classes
 

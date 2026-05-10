@@ -114,7 +114,6 @@ LABEL_SMOOTHING = 0.1
 
 # Dropout oranları
 DROPOUT_RATE_1 = 0.5
-DROPOUT_RATE_2 = 0.3
 
 # L2 regularizasyon
 L2_WEIGHT_DECAY = 1e-4
@@ -158,7 +157,7 @@ WEB_TTA_AUGMENTS = 1
 # =============================================================================
 FLASK_HOST = "0.0.0.0"
 FLASK_PORT = 5000
-FLASK_DEBUG = True
+FLASK_DEBUG = False
 UPLOAD_FOLDER = os.path.join(PROJECT_ROOT, "webapp", "uploads")
 DATABASE_PATH = os.path.join(PROJECT_ROOT, "webapp", "deepembryo.db")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)

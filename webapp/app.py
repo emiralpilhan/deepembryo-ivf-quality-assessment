@@ -32,7 +32,7 @@ from werkzeug.utils import secure_filename
 from config.config import (
     CLASS_NAMES, IMG_HEIGHT, IMG_WIDTH, UPLOAD_FOLDER,
     LOW_CONFIDENCE_THRESHOLD, MODEL_DIR, FLASK_HOST, FLASK_PORT,
-    RANDOM_SEED, WEB_TTA_AUGMENTS
+    FLASK_DEBUG, RANDOM_SEED, WEB_TTA_AUGMENTS
 )
 from webapp.database import (
     save_prediction,
@@ -313,7 +313,7 @@ def run_webapp():
     """Flask uygulamasını başlatır."""
     load_model_once()
     print(f"\n  🌐 Web uygulaması başlatılıyor: http://localhost:{FLASK_PORT}")
-    app.run(host=FLASK_HOST, port=FLASK_PORT, debug=False)
+    app.run(host=FLASK_HOST, port=FLASK_PORT, debug=FLASK_DEBUG)
 
 
 if __name__ == "__main__":
