@@ -301,6 +301,7 @@ Egitim sirasinda her epoch icin tablo formatinda:
 | TTA Classification Report | Tamamlandi | outputs/reports/classification_report_tta.csv |
 | K-Fold CV Karsilastirma Raporu | Ek analiz tamamlandi | K_FOLD_VE_FINAL_MODEL_KARSILASTIRMA_RAPORU.md |
 | Sunum/Rapor Final Notlari | Tamamlandi | SUNUM_VE_RAPOR_ICIN_FINAL_PROJE_NOTLARI.md |
+| 15 Dakikalik Sunum Sablonu | Tamamlandi | SUNUM_15_DAKIKA_3_KISI_SABLONU.md |
 | Grad-CAM Goruntuler | Tamamlandi | outputs/gradcam/ |
 | Morfolojik Rapor | Tamamlandi | outputs/reports/morphological_report.json |
 | Kaynak Kodu (yorumlu) | Tamamlandi | Tum .py dosyalari |
